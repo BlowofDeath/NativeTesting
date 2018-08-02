@@ -1,34 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import HomeScreen from './src/components/HomeScreen';
+import Profile from './src/components/Profile';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View>
-        <View style={styles.header}>
-          <Text>Header</Text>
-        </View>
-        <View style={styles.content}>
-          <Text>Content</Text>
-        </View>
-      </View>
-    );
-  }
-}
+const App = createStackNavigator({
+  Home: { screen: HomeScreen },
+  Profile: { screen: Profile }
+  
+});
 
-const styles = {
-  content: {
-    backgroundColor: '#909090',
-    height: 600,
-    padding: 10
-    
-  },
-  header: {
-    height: 60,
-    backgroundColor: '#303030',
-    paddingTop: 30,
-    alignItems: 'center',
-
-
-  }
-};
+export default App;
