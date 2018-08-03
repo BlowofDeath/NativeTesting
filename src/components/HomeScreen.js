@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component {
               <TouchableHighlight onPress={() => navigate('Profile', { name: item.name, surname: item.surname, tel: item.tel})}><Text style={stylesText.content}>{item.name} {item.surname}</Text></TouchableHighlight>
               <Text style={stylesText.content}>{item.tel}</Text>
             </View>}/>
+            
   
           </View>
         </View>
