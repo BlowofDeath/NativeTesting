@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Image, ViewPagerAndroid } from 'react-native';
 import { stylesText, stylesView } from './styles';
+import ProfileDetailRow from './ProfileDetailRow';
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -24,31 +25,16 @@ export default class Profile extends React.Component {
             </View>
             
             <View style={stylesView.content}>
-                <TextInput 
-                style={stylesText.profile_options} 
-                underlineColorAndroid={'transparent'}  
-                value={this.state.name}
-                placeholder={'Imię'}
-                placeholderTextColor='#666' 
-                onChange={(e) => { this.setState({ name: e.target.value })}}/>
-                <TextInput 
-                style={stylesText.profile_options} 
-                underlineColorAndroid={'transparent'}  
-                value={this.state.surname} 
-                placeholder={'Nazwisko'}
-                placeholderTextColor='#666'
-                onChange={(e) => { this.setState({ surname: e.target.value })}}/>
-                <TextInput 
-                style={stylesText.profile_options} 
-                underlineColorAndroid={'transparent'}   
-                value={this.state.tel}
-                placeholder='Telefon'
-                placeholderTextColor='#666'
-                onChange={(e) => { this.setState({ tel: e.target.value })}}/>
+                <ProfileDetailRow type="name" name={this.state.name} ph="Name" stateUpdate={this.stateUpdate.bind(this)}/>
+                <ProfileDetailRow type="surname" name={this.state.surname} ph="Surname" stateUpdate={this.stateUpdate.bind(this)}/>
+                <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
             </View>
-            
+         
           </View>
         );
-
+    }
+    stateUpdate(type, event) {
+            this.setState({ [type]: event.target.value });
     }
 }
+

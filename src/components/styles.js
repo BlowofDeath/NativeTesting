@@ -1,13 +1,13 @@
 export const stylesView = {
     content: {
-      backgroundColor: '#c9c9c9',
+      backgroundColor: '#303030',
       padding: 10,
       flex: 8,
       
     },
     header: {
       height: 60,
-      backgroundColor: '#303030',
+      backgroundColor: '#fcac50',
       paddingTop: 20,
       alignItems: 'center',
       justifyContent: 'center',
@@ -33,6 +33,8 @@ export const stylesView = {
         height: 40, 
         paddingLeft: 4, 
         borderBottomWidth: 1, 
-        borderBottomColor: 'grey'
+        borderBottomColor: 'grey',
+        color: '#abb',
+        fontSize: 18
     }
   };
