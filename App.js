@@ -5,8 +5,14 @@ import { createStackNavigator, createDrawerNavigator} from 'react-navigation';
 import HomeScreen from './src/components/HomeScreen';
 import Profile from './src/components/Profile';
 import AddProfile from './src/components/AddProfile';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
+function reducer(state = { contacts: {name: 'grrr'}}, action) {
+  return state;
+}
 
+const store = createStore(reducer);
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -14,10 +20,6 @@ const reducer = (state = {}, action) => {
           return state;
   }
 }
-
-
-
-
 
 const Drawer = createDrawerNavigator({
   Home: { screen: HomeScreen, navigationOptions: {
@@ -37,7 +39,19 @@ const Stack = createStackNavigator({
   Profile: { screen: Profile }
 });
 
-export default Stack;
+
+
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+       <Stack />
+      </Provider>
+    );
+  }
+}
+
+export default App;
 
 
 

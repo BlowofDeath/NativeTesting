@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Image, ViewPagerAndroid } from 'react-native';
 import { stylesText, stylesView } from './styles';
 import ProfileDetailRow from './ProfileDetailRow';
+import { connect } from 'react-redux';
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props);
         const { navigation } = this.props;
@@ -28,6 +29,7 @@ export default class Profile extends React.Component {
                 <ProfileDetailRow type="name" name={this.state.name} ph="Name" stateUpdate={this.stateUpdate.bind(this)}/>
                 <ProfileDetailRow type="surname" name={this.state.surname} ph="Surname" stateUpdate={this.stateUpdate.bind(this)}/>
                 <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
+                {this.props.contacts ? <Text>{JSON.stringify(this.props.contacts)}</Text>: <Text>Niet</Text>}
             </View>
          
           </View>
@@ -37,4 +39,12 @@ export default class Profile extends React.Component {
             this.setState({ [type]: event.target.value });
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        contacts: state.contacts
+    };  
+}
+
+export default connect(mapStateToProps)(Profile);
 
