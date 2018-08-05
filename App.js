@@ -1,11 +1,22 @@
 import './ReactotronConfig';
 import React from 'react';
+import { View } from 'react-native';
 import { createStackNavigator, createDrawerNavigator} from 'react-navigation';
-import { AsyncStorage } from 'react-native';
 import HomeScreen from './src/components/HomeScreen';
 import Profile from './src/components/Profile';
 import AddProfile from './src/components/AddProfile';
-import Storage from './src/tools/Storage';
+
+
+
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+      default:
+          return state;
+  }
+}
+
+
+
 
 
 const Drawer = createDrawerNavigator({
@@ -21,11 +32,13 @@ Drawer.navigationOptions = {
   header: null,
 }
   
-
- 
-const App = createStackNavigator({
-  Home: { screen: Drawer },
+const Stack = createStackNavigator({
+  Home: { screen: Drawer},
   Profile: { screen: Profile }
 });
 
-export default App;
+export default Stack;
+
+
+
+
