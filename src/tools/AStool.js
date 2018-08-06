@@ -27,9 +27,8 @@ export default class AStool {
         });
     }
     static async addDataToArray(data,name) {
-        let item = await AsyncStorage.getItem(name);
-        let value = JSON.parse(item);
+        let item = await this.getData(name);;
         value.push(data)
-        this.setData(name, value);
+        this.setData(name, JSON.stringify(value));
     }
 }

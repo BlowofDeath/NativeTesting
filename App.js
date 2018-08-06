@@ -5,7 +5,8 @@ import HomeScreen from './src/components/HomeScreen';
 import Profile from './src/components/Profile';
 import AddProfile from './src/components/AddProfile';
 import { Provider } from 'react-redux';
-import store from './src/Store/store';
+import { store, persistor }  from './src/Store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 const Drawer = createDrawerNavigator({
@@ -30,7 +31,9 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
        <Stack />
+       </PersistGate>
       </Provider>
     );
   }

@@ -17,7 +17,7 @@ class HomeScreen extends React.Component {
         header: null
     }
     componentDidMount() {
-      AStool.getData('contacts').then(value => { this.props.initialContacts(value)});
+      //AStool.getData('contacts').then(value => { this.props.initialContacts(value)});
       
     }
     render() {
