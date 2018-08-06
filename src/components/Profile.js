@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, Image, ViewPagerAndroid 
 import { stylesText, stylesView } from './styles';
 import ProfileDetailRow from './ProfileDetailRow';
 import { connect } from 'react-redux';
+import * as ac from './../Store/Actions/main.ac';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -29,7 +30,6 @@ class Profile extends React.Component {
                 <ProfileDetailRow type="name" name={this.state.name} ph="Name" stateUpdate={this.stateUpdate.bind(this)}/>
                 <ProfileDetailRow type="surname" name={this.state.surname} ph="Surname" stateUpdate={this.stateUpdate.bind(this)}/>
                 <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
-                {this.props.contacts ? <Text>{JSON.stringify(this.props.contacts)}</Text>: <Text>Niet</Text>}
             </View>
          
           </View>
@@ -46,5 +46,11 @@ const mapStateToProps = state => {
     };  
 }
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = dispatch => {
+    return {
+        addContact: (name, surname, tel) => dispatch(ac.addContact)
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 

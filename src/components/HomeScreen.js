@@ -1,20 +1,25 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableHighlight, AsyncStorage, Button } from 'react-native';
 import { stylesText, stylesView } from './styles';
+import { connect } from 'react-redux';
 import ct from './contacts.json';
-import Storage from './../tools/Storage';
+import * as ac from './../Store/Actions/main.ac';
+import AStool from './../tools/AStool';
 
-
-
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor() {
       super();
       this.state = { contacts: [] }
+      AStool.setData('contacts', ct);
+
     }
     static navigationOptions = {
         header: null
     }
-
+    componentDidMount() {
+      AStool.getData('contacts').then(value => { this.props.initialContacts(value)});
+      
+    }
     render() {
       const { navigate } = this.props.navigation;
       return (
@@ -23,9 +28,9 @@ export default class HomeScreen extends React.Component {
             <Text style={stylesText.header}>Kontakty</Text>
           </View>
           <View style={stylesView.content}>
-  
+   
             <FlatList 
-            data={ct}
+            data={this.props.contacts}
             keyExtractor={(item, index) => index.toString()} 
             renderItem={({item}) => 
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20}}>
@@ -37,6 +42,21 @@ export default class HomeScreen extends React.Component {
       );
     }
   }
+
+const mapStateToProps = state => {
+    return {
+        contacts: state.contacts
+    };  
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        initialContacts: (data) => dispatch(ac.initialContacts(data)),
+        addContact: (name, surname, tel) => dispatch(ac.addContact(name, surname, tel))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
   
 
   
