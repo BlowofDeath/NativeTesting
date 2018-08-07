@@ -11,7 +11,7 @@ export default class ProfileDetailRow extends React.Component {
                 value={this.props.name}
                 placeholder={this.props.ph}
                 placeholderTextColor='#666' 
-                onChange={(event) => this.props.stateUpdate(this.props.type, event)}/>
+                onChangeText={(value) => this.props.stateUpdate(this.props.type, value)}/>
         );
     }
 }

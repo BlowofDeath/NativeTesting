@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button  } from 'react-native';
+import { Text, View, Button, Alert  } from 'react-native';
 import { stylesText, stylesView } from './styles';
 import ProfileDetailRow from './ProfileDetailRow';
 import { connect } from 'react-redux';
@@ -17,9 +17,11 @@ class AddProfile extends React.Component {
     static navigationOptions = {
         header: null
     }
-    render() {
-        return (
 
+    render() {
+        const { navigate } = this.props.navigation;
+
+        return (
           <View style={{flex: 1}}>
     
             <View style={stylesView.header}>
@@ -32,17 +34,25 @@ class AddProfile extends React.Component {
                 <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
             </View>
             <Button
-            onPress={() => this.props.addContact(this.state.name, this.state.surname, this.state.tel)}
+            onPress={() => {
+                Alert.alert(
+                    'Dodano nowy kontakt',
+                    'Czy chcesz dodać kolejny?',
+                    [
+                      {text: 'Nie', onPress: () => navigate('Home'), style: 'cancel'},
+                      {text: 'Tak', onPress: () => {this.setState({name: '', surname: '', tel: ''})}},
+                    ],
+                    { cancelable: true }
+                  )
+            }}
             title="Dodaj kontakt"
             color="#ffae3d"
             />
-        
           </View>
         );
     }
-    stateUpdate(type, event) {
-            this.setState({ [type]: event.target.value });
-            console.log(this.state.name);
+    stateUpdate(type, value) {
+        this.setState({ [type]: value });
     }
 }
 

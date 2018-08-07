@@ -4,22 +4,13 @@ import { stylesText, stylesView } from './styles';
 import { connect } from 'react-redux';
 import ct from './contacts.json';
 import * as ac from './../Store/Actions/main.ac';
-import AStool from './../tools/AStool';
+
 
 class HomeScreen extends React.Component {
-    constructor() {
-      super();
-      this.state = { contacts: [] }
-      AStool.setData('contacts', ct);
-
-    }
     static navigationOptions = {
         header: null
     }
-    componentDidMount() {
-      //AStool.getData('contacts').then(value => { this.props.initialContacts(value)});
-      
-    }
+
     render() {
       const { navigate } = this.props.navigation;
       return (
@@ -32,9 +23,9 @@ class HomeScreen extends React.Component {
             <FlatList 
             data={this.props.contacts}
             keyExtractor={(item, index) => index.toString()} 
-            renderItem={({item}) => 
+            renderItem={({item, index}) => 
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20}}>
-              <TouchableHighlight onPress={() => navigate('Profile', { name: item.name, surname: item.surname, tel: item.tel})}><Text style={stylesText.content}>{item.name} {item.surname}</Text></TouchableHighlight>
+              <TouchableHighlight onPress={() => navigate('Profile', { id: index, name: item.name, surname: item.surname, tel: item.tel})}><Text style={stylesText.content}>{item.name} {item.surname}</Text></TouchableHighlight>
               <Text style={stylesText.content}>{item.tel}</Text>
             </View>}/>
           </View>
@@ -51,7 +42,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        initialContacts: (data) => dispatch(ac.initialContacts(data)),
         addContact: (name, surname, tel) => dispatch(ac.addContact(name, surname, tel))
     };
 };

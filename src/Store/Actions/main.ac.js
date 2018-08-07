@@ -1,29 +1,46 @@
 import * as at from './main.at';
-import AStool from './../../tools/AStool';
-import { AsyncStorage } from 'react-native';
 
 const addContact_middle = (name, surname, tel) => {
-    
     return {
         type: at.ADD_CONTACT,
-        name: name,
-        surname: surname,
-        tel: tel
+        name,
+        surname,
+        tel
     }
 };
 
 export const addContact = (name, surname, tel) => {
-    //AsyncStorage.setItem('contacts', {name, surname, tel});
     return dispatch => {
         dispatch(addContact_middle(name, surname, tel));
     }
 }
 
-export const initialContacts = (data) => {
+const removeContact_middle = (id) => {
+    return {
+        type: at.REMOVE_CONTACT,
+        id
+    }
+};
+
+export const removeContact = (id) => {
     return dispatch => {
-        dispatch({   
-            type: at.INITIAL_CONTACTS,
-            data: data
-        });
+        dispatch(removeContact_middle(id));
     }
 }
+
+const editContact_middle = (id, name, surname, tel) => {
+    return {
+        type: at.EDIT_CONTACT,
+        id,
+        name,
+        surname,
+        tel
+    }
+};
+
+export const editContact = (id, name, surname, tel) => {
+    return dispatch => {
+        dispatch(editContact_middle(id, name, surname, tel));
+    }
+}
+
