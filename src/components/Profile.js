@@ -4,6 +4,7 @@ import { stylesText, stylesView } from './styles';
 import ProfileDetailRow from './ProfileDetailRow';
 import { connect } from 'react-redux';
 import * as ac from './../Store/Actions/main.ac';
+import call from 'react-native-phone-call';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -34,6 +35,11 @@ class Profile extends React.Component {
                 <ProfileDetailRow type="surname" name={this.state.surname} ph="Surname" stateUpdate={this.stateUpdate.bind(this)}/>
                 <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
             </View>
+            <Button
+            onPress={() => { call({number: this.state.tel, prompt: false}).catch(console.error) }}
+            title="Zadzwoń"
+            color="#ffae3d"
+            />
             <Button
             onPress={() => {
                 Alert.alert(

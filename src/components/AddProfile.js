@@ -34,7 +34,7 @@ class AddProfile extends React.Component {
                 <ProfileDetailRow type="tel" name={this.state.tel} ph="tel." stateUpdate={this.stateUpdate.bind(this)}/>
             </View>
             <Button
-            onPress={() => {
+            onPress={() => {this.props.addContact(this.state.name, this.state.surname, this.state.tel)
                 Alert.alert(
                     'Dodano nowy kontakt',
                     'Czy chcesz dodać kolejny?',
