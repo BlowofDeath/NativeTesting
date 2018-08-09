@@ -4,6 +4,7 @@ import { createStackNavigator, createDrawerNavigator} from 'react-navigation';
 import HomeScreen from './src/components/HomeScreen';
 import Profile from './src/components/Profile';
 import AddProfile from './src/components/AddProfile';
+import Camera from './src/components/Camera';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/Store/store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -12,6 +13,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 const Drawer = createDrawerNavigator({
   Home: { screen: HomeScreen, navigationOptions: {
     title: 'Ekran główn',
+  }},
+  Cam: { screen: Camera, navigationOptions: {
+    title: 'Kamera',
   }},
   AddUser: { screen: AddProfile, navigationOptions: {
       title: 'Dodaj kontakt',
