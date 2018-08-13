@@ -110,7 +110,8 @@
       "no-plusplus": 0,
       "import/no-extraneous-dependencies": 1,
       "no-return-assign": 1,
-      "linebreak-style": 0
+      "linebreak-style": 0,
+      "indent": ["error", "tab", {"SwitchCase":1}]
     },
     "plugins": [
       "prettier"

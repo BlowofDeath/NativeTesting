@@ -1,17 +1,32 @@
 import React from 'react';
-import { Text, View, TextInput} from 'react-native';
-import { stylesText, stylesView } from './styles';
+import PropTypes from 'prop-types';
+import { TextInput } from 'react-native';
+import { stylesText } from './styles';
 
 export default class ProfileDetailRow extends React.Component {
-    render() {
-        return (
-            <TextInput 
-                style={stylesText.profile_options} 
-                underlineColorAndroid={'transparent'}  
-                value={this.props.name}
-                placeholder={this.props.ph}
-                placeholderTextColor='#666' 
-                onChangeText={(value) => this.props.stateUpdate(this.props.type, value)}/>
-        );
-    }
+	render() {
+		const { name, ph, type, stateUpdate } = this.props;
+		return (
+			<TextInput
+				style={stylesText.profile_options}
+				underlineColorAndroid="transparent"
+				value={name}
+				placeholder={ph}
+				placeholderTextColor="#666"
+				onChangeText={value => stateUpdate(type, value)}
+			/>
+		);
+	}
 }
+
+ProfileDetailRow.propTypes = {
+	name: PropTypes.string,
+	ph: PropTypes.string,
+	type: PropTypes.string.isRequired,
+	stateUpdate: PropTypes.func.isRequired,
+};
+
+ProfileDetailRow.defaultProps = {
+	name: null,
+	ph: null,
+};
